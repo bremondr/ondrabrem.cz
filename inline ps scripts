@@ -1,0 +1,4 @@
+$images = Get-ChildItem -Path "images" -File | Where-Object { @('.jpg','.jpeg','.png','.webp','.gif','.JPG','.JPEG','.PNG','.WEBP','.GIF') -contains $_.Extension } | Select-Object -ExpandProperty Name; @{ images = $images } | ConvertTo-Json | Out-File "images/images.json" -Encoding UTF8; Write-Host "Created images.json with $($images.Count) images" -ForegroundColor Green
+# PowerShell Script to Generate images.json
+# This script scans the images folder and creates/updates images.json with all image files
+
