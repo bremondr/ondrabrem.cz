@@ -2,7 +2,7 @@
     "events":  [
                    {
                        "name":  "Beach Mix MČR 2025",
-                       "folder":  "Beach Mix MCR 2025",
+                       "folder":  "BeachMixMCR2025",
                        "images":  [
                                       "2025-9-06-000.jpg",
                                       "2025-9-06-001.jpg",
@@ -26,7 +26,7 @@
                    },
                    {
                        "name":  "Halové Mix MČR 2024 - 3.liga",
-                       "folder":  "hala mix 3 liga 2024",
+                       "folder":  "halamix3liga2024",
                        "images":  [
                                       "DSC2462.jpg",
                                       "DSC2463.jpg",
