@@ -7,12 +7,15 @@ let events = [];
 let currentEvent = null;
 let currentImageIndex = 0;
 let currentGalleryImages = [];
+let visibleImages = [];
+let selectedTags = new Set();
 
 // DOM Elements
 const eventsGrid = document.getElementById('events-grid');
 const galleryContainer = document.getElementById('gallery-container');
 const gallery = document.getElementById('gallery');
 const eventTitle = document.getElementById('event-title');
+const tagFiltersContainer = document.getElementById('tag-filters');
 const backBtn = document.getElementById('back-btn');
 const lightbox = document.getElementById('lightbox');
 const lightboxImg = document.getElementById('lightbox-img');
@@ -28,7 +31,7 @@ async function initPortfolio() {
         const response = await fetch(IMAGE_FOLDER + 'images.json');
         if (response.ok) {
             const data = await response.json();
-            events = data.events || [];
+            events = normalizeEvents(data.events);
         } else {
             events = [];
         }
@@ -45,6 +48,46 @@ async function initPortfolio() {
     }
 }
 
+// Normalize events and their images to have consistent fields
+function normalizeEvents(list) {
+    return (list || []).map(event => {
+        const folder = event.folder || '';
+        return {
+            ...event,
+            name: event.name || folder || 'Untitled event',
+            folder,
+            images: normalizeImages(event.images)
+        };
+    });
+}
+
+function normalizeImages(list) {
+    return (list || [])
+        .map((item, index) => normalizeImageEntry(item, index))
+        .filter(img => img.file);
+}
+
+function normalizeImageEntry(item, index) {
+    if (typeof item === 'string') {
+        return {
+            file: item,
+            name: stripExtension(item) || `Photo ${index + 1}`,
+            keywords: []
+        };
+    }
+
+    const file = item.file || item.src || item.path || '';
+    return {
+        file,
+        name: item.name || stripExtension(file) || `Photo ${index + 1}`,
+        keywords: Array.isArray(item.keywords) ? item.keywords : []
+    };
+}
+
+function stripExtension(filename) {
+    return filename ? filename.replace(/\\.[^/.]+$/, '') : '';
+}
+
 // Load event preview grid
 function loadEventsGrid() {
     eventsGrid.innerHTML = '';
@@ -56,8 +99,10 @@ function loadEventsGrid() {
         // Get first image as preview thumbnail
         const firstImage = event.images && event.images.length > 0 
             ? event.images[0] 
-            : 'placeholder.jpg';
-        const imagePath = IMAGE_FOLDER + event.folder + '/' + firstImage;
+            : null;
+        const imagePath = firstImage 
+            ? IMAGE_FOLDER + event.folder + '/' + firstImage.file 
+            : IMAGE_FOLDER + 'placeholder.jpg';
 
         const preview = document.createElement('img');
         preview.src = imagePath;
@@ -98,11 +143,14 @@ function openEvent(eventIndex) {
     currentEvent = events[eventIndex];
     currentImageIndex = 0;
     currentGalleryImages = currentEvent.images || [];
+    selectedTags.clear();
 
     if (currentGalleryImages.length === 0) {
         gallery.innerHTML = '<p style="text-align: center; color: #666;">No images in this event.</p>';
+        if (tagFiltersContainer) tagFiltersContainer.style.display = 'none';
     } else {
-        loadGallery();
+        buildTagFilters(currentGalleryImages);
+        applyFilters();
     }
 
     eventTitle.textContent = currentEvent.name;
@@ -113,6 +161,7 @@ function openEvent(eventIndex) {
 // Back to events grid
 function backToEvents() {
     currentEvent = null;
+    selectedTags.clear();
     eventsGrid.style.display = 'grid';
     galleryContainer.style.display = 'none';
     closeLightbox();
@@ -122,13 +171,18 @@ function backToEvents() {
 function loadGallery() {
     gallery.innerHTML = '';
 
-    currentGalleryImages.forEach((imageName, index) => {
+    if (visibleImages.length === 0) {
+        gallery.innerHTML = '<p style="text-align: center; color: #666;">No images match the selected tags.</p>';
+        return;
+    }
+
+    visibleImages.forEach((image, index) => {
         const imgContainer = document.createElement('div');
         imgContainer.className = 'gallery-item';
 
         const img = document.createElement('img');
-        img.src = IMAGE_FOLDER + currentEvent.folder + '/' + imageName;
-        img.alt = `Photo ${index + 1}`;
+        img.src = IMAGE_FOLDER + currentEvent.folder + '/' + image.file;
+        img.alt = image.name || `Photo ${index + 1}`;
         img.loading = 'lazy';
 
         img.onerror = function() {
@@ -156,18 +210,109 @@ function closeLightbox() {
 }
 
 function updateLightbox() {
-    lightboxImg.src = IMAGE_FOLDER + currentEvent.folder + '/' + currentGalleryImages[currentImageIndex];
-    lightboxCounter.textContent = `${currentImageIndex + 1} / ${currentGalleryImages.length}`;
+    const currentImage = visibleImages[currentImageIndex];
+    lightboxImg.src = IMAGE_FOLDER + currentEvent.folder + '/' + currentImage.file;
+    lightboxImg.alt = currentImage.name || `Photo ${currentImageIndex + 1}`;
+    lightboxCounter.textContent = `${currentImageIndex + 1} / ${visibleImages.length}`;
 }
 
 function nextImage() {
-    currentImageIndex = (currentImageIndex + 1) % currentGalleryImages.length;
+    currentImageIndex = (currentImageIndex + 1) % visibleImages.length;
     updateLightbox();
 }
 
 function prevImage() {
-    currentImageIndex = (currentImageIndex - 1 + currentGalleryImages.length) % currentGalleryImages.length;
+    currentImageIndex = (currentImageIndex - 1 + visibleImages.length) % visibleImages.length;
     updateLightbox();
+}
+
+// Tag filter helpers
+function buildTagFilters(images) {
+    if (!tagFiltersContainer) return;
+
+    const keywords = getUniqueKeywords(images);
+    if (keywords.length === 0) {
+        tagFiltersContainer.style.display = 'none';
+        return;
+    }
+
+    tagFiltersContainer.style.display = 'flex';
+    tagFiltersContainer.innerHTML = '';
+
+    const allBtn = createTagButton('All', true, () => {
+        selectedTags.clear();
+        updateActiveTags();
+        applyFilters();
+    });
+    tagFiltersContainer.appendChild(allBtn);
+
+    keywords.forEach(kw => {
+        const btn = createTagButton(kw, false, () => {
+            toggleTag(kw);
+            applyFilters();
+        });
+        tagFiltersContainer.appendChild(btn);
+    });
+}
+
+function getUniqueKeywords(list) {
+    const keywordMap = new Map();
+    list.forEach(img => {
+        (img.keywords || []).forEach(raw => {
+            if (typeof raw !== 'string') return;
+            const kw = raw.trim();
+            if (!kw) return;
+            const key = kw.toLowerCase();
+            if (!keywordMap.has(key)) keywordMap.set(key, kw);
+        });
+    });
+    return Array.from(keywordMap.values());
+}
+
+function createTagButton(label, isActive, onClick) {
+    const btn = document.createElement('button');
+    btn.className = 'tag-filter';
+    if (isActive) btn.classList.add('active');
+    btn.textContent = label;
+    btn.addEventListener('click', onClick);
+    return btn;
+}
+
+function toggleTag(tag) {
+    if (selectedTags.has(tag)) {
+        selectedTags.delete(tag);
+    } else {
+        selectedTags.add(tag);
+    }
+    updateActiveTags();
+}
+
+function updateActiveTags() {
+    if (!tagFiltersContainer) return;
+    const buttons = tagFiltersContainer.querySelectorAll('.tag-filter');
+    buttons.forEach(btn => {
+        const label = btn.textContent;
+        if (label === 'All') {
+            btn.classList.toggle('active', selectedTags.size === 0);
+        } else {
+            btn.classList.toggle('active', selectedTags.has(label));
+        }
+    });
+}
+
+function applyFilters() {
+    visibleImages = getFilteredImages(currentGalleryImages, selectedTags);
+    currentImageIndex = 0;
+    loadGallery();
+}
+
+function getFilteredImages(list, tags) {
+    if (!tags || tags.size === 0) return list.slice();
+    const required = Array.from(tags).map(t => t.toLowerCase());
+    return list.filter(img => {
+        const kws = (img.keywords || []).map(k => (typeof k === 'string' ? k.toLowerCase() : ''));
+        return required.every(tag => kws.includes(tag));
+    });
 }
 
 // Event Listeners

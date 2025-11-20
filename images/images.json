@@ -1,25 +1,109 @@
 ﻿{
-    "images":  [
-                   "0907-0008.jpg",
-                   "2013-08-23-0015.jpg",
-                   "2013-08-25-0016.jpg",
-                   "DSC2956.jpg",
-                   "DSC2995.jpg",
-                   "DSC3219.jpg",
-                   "DSC3234.jpg",
-                   "DSC3269.jpg",
-                   "DSC3299.jpg",
-                   "DSC3301.jpg",
-                   "DSC3308.jpg",
-                   "DSC3319.jpg",
-                   "DSC3333.jpg",
-                   "DSC3338.jpg",
-                   "DSC5305.jpg",
-                   "DSC5366.jpg",
-                   "DSC5681.jpg",
-                   "DSC6257.jpg",
-                   "OB15275.jpg",
-                   "OB15304.jpg",
-                   "OB15418.jpg"
-               ]
+    "images": [
+        {
+            "file": "0907-0008.jpg",
+            "name": "0907-0008",
+            "keywords": ["landscape"]
+        },
+        {
+            "file": "2013-08-23-0015.jpg",
+            "name": "2013-08-23-0015",
+            "keywords": ["landscape"]
+        },
+        {
+            "file": "2013-08-25-0016.jpg",
+            "name": "2013-08-25-0016",
+            "keywords": ["landscape"]
+        },
+        {
+            "file": "DSC2956.jpg",
+            "name": "DSC2956",
+            "keywords": ["birds"]
+        },
+        {
+            "file": "DSC2995.jpg",
+            "name": "DSC2995",
+            "keywords": ["birds"]
+        },
+        {
+            "file": "DSC3219.jpg",
+            "name": "DSC3219",
+            "keywords": ["birds"]
+        },
+        {
+            "file": "DSC3234.jpg",
+            "name": "DSC3234",
+            "keywords": ["birds"]
+        },
+        {
+            "file": "DSC3269.jpg",
+            "name": "DSC3269",
+            "keywords": ["birds"]
+        },
+        {
+            "file": "DSC3299.jpg",
+            "name": "DSC3299",
+            "keywords": ["birds"]
+        },
+        {
+            "file": "DSC3301.jpg",
+            "name": "DSC3301",
+            "keywords": ["birds"]
+        },
+        {
+            "file": "DSC3308.jpg",
+            "name": "DSC3308",
+            "keywords": ["birds"]
+        },
+        {
+            "file": "DSC3319.jpg",
+            "name": "DSC3319",
+            "keywords": ["birds"]
+        },
+        {
+            "file": "DSC3333.jpg",
+            "name": "DSC3333",
+            "keywords": ["birds"]
+        },
+        {
+            "file": "DSC3338.jpg",
+            "name": "DSC3338",
+            "keywords": ["birds"]
+        },
+        {
+            "file": "DSC5305.jpg",
+            "name": "DSC5305",
+            "keywords": ["birds"]
+        },
+        {
+            "file": "DSC5366.jpg",
+            "name": "DSC5366",
+            "keywords": ["birds"]
+        },
+        {
+            "file": "DSC5681.jpg",
+            "name": "DSC5681",
+            "keywords": ["birds"]
+        },
+        {
+            "file": "DSC6257.jpg",
+            "name": "DSC6257",
+            "keywords": ["birds"]
+        },
+        {
+            "file": "OB15275.jpg",
+            "name": "OB15275",
+            "keywords": ["insects"]
+        },
+        {
+            "file": "OB15304.jpg",
+            "name": "OB15304",
+            "keywords": ["insects"]
+        },
+        {
+            "file": "OB15418.jpg",
+            "name": "OB15418",
+            "keywords": ["insects"]
+        }
+    ]
 }

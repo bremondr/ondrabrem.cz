@@ -1,60 +1,62 @@
-﻿{
-    "events":  [
-                   {
-                       "name":  "Beach Mix MČR 2025",
-                       "folder":  "BeachMixMCR2025",
-                       "images":  [
-                                      "2025-9-06-000.jpg",
-                                      "2025-9-06-001.jpg",
-                                      "2025-9-06-002.jpg",
-                                      "2025-9-06-003.jpg",
-                                      "2025-9-06-004.jpg",
-                                      "2025-9-06-005.jpg",
-                                      "2025-9-06-006.jpg",
-                                      "2025-9-06-007.jpg",
-                                      "2025-9-06-008.jpg",
-                                      "2025-9-06-009.jpg",
-                                      "2025-9-06-010.jpg",
-                                      "2025-9-06-011.jpg",
-                                      "2025-9-06-012.jpg",
-                                      "2025-9-06-013.jpg",
-                                      "2025-9-06-014.jpg",
-                                      "2025-9-06-015.jpg",
-                                      "2025-9-06-016.jpg",
-                                      "2025-9-06-017.jpg"
-                                  ]
-                   },
-                   {
-                       "name":  "Halové Mix MČR 2024 - 3.liga",
-                       "folder":  "halamix3liga2024",
-                       "images":  [
-                                      "DSC2462.jpg",
-                                      "DSC2463.jpg",
-                                      "DSC2493.jpg",
-                                      "DSC2507.jpg",
-                                      "DSC2528.jpg",
-                                      "DSC2532.jpg",
-                                      "DSC2563-Enhanced-NR.jpg",
-                                      "DSC2572-Enhanced-NR.jpg",
-                                      "DSC2590.jpg",
-                                      "DSC2649-Enhanced-NR.jpg",
-                                      "DSC2706-Enhanced-NR.jpg",
-                                      "DSC2764.jpg",
-                                      "DSC2794.jpg",
-                                      "DSC2822.jpg",
-                                      "DSC2845.jpg",
-                                      "DSC2867.jpg",
-                                      "DSC2873.jpg",
-                                      "DSC2998-Enhanced-NR.jpg",
-                                      "DSC3074.jpg",
-                                      "DSC3118.jpg",
-                                      "DSC3307.jpg",
-                                      "DSC3317.jpg",
-                                      "DSC3322.jpg",
-                                      "DSC3763.jpg",
-                                      "DSC3770.jpg",
-                                      "DSC3772.jpg"
-                                  ]
-                   }
-               ]
+{
+    "events": [
+        {
+            "name": "Beach Mix MCR 2025",
+            "folder": "BeachMixMCR2025",
+            "images": [
+                {"file": "2025-9-06-000.jpg", "name": "2025-9-06-000", "keywords": []},
+                {"file": "2025-9-06-001.jpg", "name": "2025-9-06-001", "keywords": []},
+                {"file": "2025-9-06-002.jpg", "name": "2025-9-06-002", "keywords": []},
+                {"file": "2025-9-06-003.jpg", "name": "2025-9-06-003", "keywords": []},
+                {"file": "2025-9-06-004.jpg", "name": "2025-9-06-004", "keywords": []},
+                {"file": "2025-9-06-005.jpg", "name": "2025-9-06-005", "keywords": []},
+                {"file": "2025-9-06-006.jpg", "name": "2025-9-06-006", "keywords": []},
+                {"file": "2025-9-06-007.jpg", "name": "2025-9-06-007", "keywords": []},
+                {"file": "2025-9-06-008.jpg", "name": "2025-9-06-008", "keywords": []},
+                {"file": "2025-9-06-009.jpg", "name": "2025-9-06-009", "keywords": []},
+                {"file": "2025-9-06-010.jpg", "name": "2025-9-06-010", "keywords": []},
+                {"file": "2025-9-06-011.jpg", "name": "2025-9-06-011", "keywords": []},
+                {"file": "2025-9-06-012.jpg", "name": "2025-9-06-012", "keywords": []},
+                {"file": "2025-9-06-013.jpg", "name": "2025-9-06-013", "keywords": []},
+                {"file": "2025-9-06-014.jpg", "name": "2025-9-06-014", "keywords": []},
+                {"file": "2025-9-06-015.jpg", "name": "2025-9-06-015", "keywords": []},
+                {"file": "2025-9-06-016.jpg", "name": "2025-9-06-016", "keywords": []},
+                {"file": "2025-9-06-017.jpg", "name": "2025-9-06-017", "keywords": []}
+            ]
+        },
+        {
+            "name": "Halovy Mix MCR 2024 - 3.liga",
+            "folder": "halamix3liga2024",
+            "images": [
+                {"file": "DSC2462.jpg", "name": "DSC2462", "keywords": []},
+                {"file": "DSC2463.jpg", "name": "DSC2463", "keywords": []},
+                {"file": "DSC2493.jpg", "name": "DSC2493", "keywords": []},
+                {"file": "DSC2507.jpg", "name": "DSC2507", "keywords": []},
+                {"file": "DSC2528.jpg", "name": "DSC2528", "keywords": []},
+                {"file": "DSC2532.jpg", "name": "DSC2532", "keywords": []},
+                {"file": "DSC2563-Enhanced-NR.jpg", "name": "DSC2563-Enhanced-NR", "keywords": []},
+                {"file": "DSC2572-Enhanced-NR.jpg", "name": "DSC2572-Enhanced-NR", "keywords": []},
+                {"file": "DSC2590.jpg", "name": "DSC2590", "keywords": []},
+                {"file": "DSC2649-Enhanced-NR.jpg", "name": "DSC2649-Enhanced-NR", "keywords": []},
+                {"file": "DSC2706-Enhanced-NR.jpg", "name": "DSC2706-Enhanced-NR", "keywords": []},
+                {"file": "DSC2764.jpg", "name": "DSC2764", "keywords": []},
+                {"file": "DSC2794.jpg", "name": "DSC2794", "keywords": []},
+                {"file": "DSC2822.jpg", "name": "DSC2822", "keywords": []},
+                {"file": "DSC2845.jpg", "name": "DSC2845", "keywords": []},
+                {"file": "DSC2867.jpg", "name": "DSC2867", "keywords": []},
+                {"file": "DSC2873.jpg", "name": "DSC2873", "keywords": []},
+                {"file": "DSC2998-Enhanced-NR.jpg", "name": "DSC2998-Enhanced-NR", "keywords": []},
+                {"file": "DSC3074.jpg", "name": "DSC3074", "keywords": []},
+                {"file": "DSC3118.jpg", "name": "DSC3118", "keywords": []},
+                {"file": "DSC3307.jpg", "name": "DSC3307", "keywords": []},
+                {"file": "DSC3317.jpg", "name": "DSC3317", "keywords": []},
+                {"file": "DSC3322.jpg", "name": "DSC3322", "keywords": []},
+                {"file": "DSC3763.jpg", "name": "DSC3763", "keywords": []},
+                {"file": "DSC3770.jpg", "name": "DSC3770", "keywords": []},
+                {"file": "DSC3772.jpg", "name": "DSC3772", "keywords": []}
+            ]
+        }
+    ]
 }
+
+
