@@ -311,7 +311,7 @@ function getFilteredImages(list, tags) {
     const required = Array.from(tags).map(t => t.toLowerCase());
     return list.filter(img => {
         const kws = (img.keywords || []).map(k => (typeof k === 'string' ? k.toLowerCase() : ''));
-        return required.every(tag => kws.includes(tag));
+        return required.some(tag => kws.includes(tag));
     });
 }
 
