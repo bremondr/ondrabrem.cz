@@ -25,11 +25,19 @@ if ($imageFiles.Count -eq 0) {
 }
 
 # Create array of image filenames
-$imageNames = $imageFiles | ForEach-Object { $_.Name }
+# Build image objects with defaults
+$imageObjects = $imageFiles | ForEach-Object {
+    $nameWithoutExt = [System.IO.Path]::GetFileNameWithoutExtension($_.Name)
+    [PSCustomObject]@{
+        file     = $_.Name
+        name     = $nameWithoutExt
+        keywords = @()
+    }
+}
 
 # Create JSON structure
 $jsonObject = @{
-    images = $imageNames
+    images = $imageObjects
 } | ConvertTo-Json -Depth 10
 
 # Write to file with UTF-8 encoding
