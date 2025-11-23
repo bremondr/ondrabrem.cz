@@ -24,14 +24,39 @@ if ($imageFiles.Count -eq 0) {
     exit
 }
 
-# Create array of image filenames
-# Build image objects with defaults
+# Load existing JSON if it exists
+$existingImages = @()
+if (Test-Path $outputFile) {
+    try {
+        $existingJson = Get-Content -Path $outputFile -Raw | ConvertFrom-Json
+        $existingImages = $existingJson.images | ForEach-Object { $_ }
+        Write-Host "Loaded existing images.json with $($existingImages.Count) entries" -ForegroundColor Cyan
+    } catch {
+        Write-Host "Could not parse existing images.json, starting fresh" -ForegroundColor Yellow
+    }
+}
+
+# Create a hashtable of existing images by filename for quick lookup
+$existingMap = @{}
+$existingImages | ForEach-Object {
+    $existingMap[$_.file] = $_
+}
+
+# Build image objects - merge with existing metadata or create new entries
 $imageObjects = $imageFiles | ForEach-Object {
-    $nameWithoutExt = [System.IO.Path]::GetFileNameWithoutExtension($_.Name)
-    [PSCustomObject]@{
-        file     = $_.Name
-        name     = $nameWithoutExt
-        keywords = @()
+    $filename = $_.Name
+    
+    if ($existingMap.ContainsKey($filename)) {
+        # Use existing entry with its metadata
+        $existingMap[$filename]
+    } else {
+        # Create new entry with defaults
+        $nameWithoutExt = [System.IO.Path]::GetFileNameWithoutExtension($filename)
+        [PSCustomObject]@{
+            file     = $filename
+            name     = $nameWithoutExt
+            keywords = @()
+        }
     }
 }
 
