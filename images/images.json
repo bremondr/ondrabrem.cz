@@ -258,6 +258,34 @@
                        "keywords":  [
                                         "insects"
                                     ]
+                   },
+                   {
+                       "file":  "dsc2054.jpg",
+                       "name":  "dsc2054",
+                       "keywords":  [
+                                        "birds"
+                                    ]
+                   },
+                   {
+                       "file":  "dsc2069.jpg",
+                       "name":  "dsc2069",
+                       "keywords":  [
+                                        "birds"
+                                    ]
+                   },
+                   {
+                       "file":  "dsc2095.jpg",
+                       "name":  "dsc2095",
+                       "keywords":  [
+                                        "birds"
+                                    ]
+                   },
+                   {
+                       "file":  "dsc2099.jpg",
+                       "name":  "dsc2099",
+                       "keywords":  [
+                                        "birds"
+                                    ]
                    }
                ]
 }
